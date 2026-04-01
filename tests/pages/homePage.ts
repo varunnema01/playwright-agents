@@ -7,7 +7,7 @@ import { BasePage } from './basePage';
 export class HomePage extends BasePage {
   // Fix: Use more specific selector to avoid matching readonly search box
   readonly searchBox: string = 'input[name="q"]:not([readonly])';
-  readonly cartIcon: string = 'a[href="/viewcart"]';
+  readonly cartIcon: string = 'a[href*="/viewcart"]';
   readonly loginLink: string = 'a[href*="login"]';
   readonly fashionCategory: string = 'a:has-text("Fashion")';
   readonly mobilesCategory: string = 'a:has-text("Mobiles")';
@@ -56,26 +56,41 @@ export class HomePage extends BasePage {
   }
 
   async clickFlipkartLogo(): Promise<void> {
+    // Dismiss any overlay blocking interaction
+    await this.pressKey('Escape');
+    await this.page.waitForTimeout(300);
     await this.click('a[href="/"]');
     await this.page.waitForLoadState('networkidle');
   }
 
   async clickFashionCategory(): Promise<void> {
+    // Dismiss any overlay blocking interaction
+    await this.pressKey('Escape');
+    await this.page.waitForTimeout(300);
     await this.click(this.fashionCategory);
     await this.page.waitForLoadState('networkidle');
   }
 
   async clickMobilesCategory(): Promise<void> {
+    // Dismiss any overlay blocking interaction
+    await this.pressKey('Escape');
+    await this.page.waitForTimeout(300);
     await this.click(this.mobilesCategory);
     await this.page.waitForLoadState('networkidle');
   }
 
   async clickElectronicsCategory(): Promise<void> {
+    // Dismiss any overlay blocking interaction
+    await this.pressKey('Escape');
+    await this.page.waitForTimeout(300);
     await this.click(this.electronicsCategory);
     await this.page.waitForLoadState('networkidle');
   }
 
   async clickHomeCategory(): Promise<void> {
+    // Dismiss any overlay blocking interaction
+    await this.pressKey('Escape');
+    await this.page.waitForTimeout(300);
     await this.click(this.homeCategory);
     await this.page.waitForLoadState('networkidle');
   }
