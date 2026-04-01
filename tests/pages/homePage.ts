@@ -39,12 +39,21 @@ export class HomePage extends BasePage {
     await searchInput.fill(searchTerm);
     await this.page.waitForTimeout(300);
     
+    // Dismiss overlay again before clicking search
+    await this.pressKey('Escape');
+    await this.page.waitForTimeout(500);
+    
     // Look for a search button and click it, or press Enter
     const searchButton = this.page.locator('button[class*="search"], button svg[class*="search"], form button').first();
     const buttonExists = await searchButton.isVisible().catch(() => false);
     
     if (buttonExists) {
-      await searchButton.click();
+      try {
+        await searchButton.click({ timeout: 5000 });
+      } catch (e) {
+        // If click fails due to overlay, press Enter instead
+        await this.pressKey('Enter');
+      }
     } else {
       // Try pressing Enter
       await this.pressKey('Enter');
