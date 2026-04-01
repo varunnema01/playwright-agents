@@ -10,7 +10,7 @@ export class SearchPage extends BasePage {
   readonly productPrice: string = 'div[class*="price"]';
   readonly productRating: string = 'span[class*="rating"]';
   readonly sortDropdown: string = 'select[class*="sort"]';
-  readonly nextPageButton: string = 'button:has-text("Next")';
+  readonly nextPageButton: string = 'a:has(span:text-is("Next"))';
 
   constructor(page: Page) { super(page); }
 
